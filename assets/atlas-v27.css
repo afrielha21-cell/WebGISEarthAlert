@@ -21,3 +21,22 @@
 .earth-close{position:absolute;right:0;top:0;border:0;background:#eaf2f5;width:26px;height:26px;cursor:pointer;border-radius:50%;font-size:19px;color:#1c5068}
 .earth-popover .earth-answer{max-height:260px;overflow:auto}
 @media(max-width:570px){.earth-launcher{right:12px;bottom:12px}.earth-popover{right:10px;bottom:72px;width:calc(100vw - 20px);max-height:78vh}}
+
+/* V28 — match the supplied identity assets and consolidate overlays */
+.brand-partners{gap:8px;align-items:center}
+.brand-partners a{display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:0}
+.brand-partners a img{display:block;object-fit:contain;width:46px;height:46px;max-width:none}
+.brand-partners img.partner-school,.brand-partners img[src*="bmkg.webp"]{width:51px;height:51px}
+.brand-partners img.partner-big{width:38px;height:38px}
+.brand-partners img.partner-inarisk{width:86px;height:34px;max-width:86px}
+.brand-partners img.partner-kemenag{width:54px;height:54px}
+.atlas-layer-center{background:#f6fafc;border:1px solid #dae7ef;box-shadow:none}
+.atlas-layer-body{gap:7px;padding:2px 14px 12px}
+.atlas-layer-grid{margin:0;padding:12px 0 3px;border:0;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 16px}
+.atlas-layer-grid legend{font-weight:750;color:#25566c;font-size:10px;letter-spacing:.55px;padding:0 0 4px}
+.atlas-layer-grid label{display:flex;align-items:flex-start;gap:7px;margin:0;padding:6px 2px;color:#28536a;font-size:11px;line-height:1.45;cursor:pointer}
+.atlas-layer-grid input[type="checkbox"]{margin:1px 0 0;flex:0 0 auto;accent-color:#168eaa}
+.atlas-status-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:1150px){.brand-partners img.partner-school,.brand-partners img[src*="bmkg.webp"]{width:42px;height:42px}.brand-partners img.partner-big{width:32px;height:32px}.brand-partners img.partner-inarisk{width:75px;height:29px;max-width:75px}.brand-partners img.partner-kemenag{width:45px;height:45px}}
+@media(max-width:770px){.atlas-layer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:570px){.atlas-layer-grid{grid-template-columns:1fr 1fr;gap:5px 10px}.brand-partners{gap:4px}.brand-partners img.partner-school,.brand-partners img[src*="bmkg.webp"]{width:29px;height:29px}.brand-partners img.partner-big{width:23px;height:23px}.brand-partners img.partner-inarisk{width:49px;height:22px;max-width:49px}.brand-partners img.partner-kemenag{width:33px;height:33px}}
