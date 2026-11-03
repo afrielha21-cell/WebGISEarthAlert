@@ -12,24 +12,34 @@
   const news=document.getElementById('atlas-news');
   const earth=document.getElementById('tanya-earth');
   if(news && earth)earth.before(news);
-  // Move the original layer inputs, without cloning or changing their IDs,
-  // so their existing Leaflet listeners keep working.
+  // Preserve the existing input nodes and listeners; all six map overlays
+  // now share a single accessible, responsive layer selection group.
   const row=mapPanel.querySelector('.tool-row.second');
   const geo=mapPanel.querySelector('.geo-controls');
   const tect=mapPanel.querySelector('.tectonic-extra');
   const frame=mapPanel.querySelector('.map-frame');
-  if(frame&&(row||geo||tect)){
+  if(frame && (row||geo||tect)){
    const details=document.createElement('details');
-   details.className='atlas-layer-center';
-   details.open=true;
+   details.className='atlas-layer-center';details.open=true;
    const summary=document.createElement('summary');
-   summary.textContent='Pengaturan lapisan, klaster & transparansi';
+   summary.textContent='Pengaturan Atlas & Lapisan Peta';
    details.append(summary);
-   const body=document.createElement('div');
-   body.className='atlas-layer-body';
-   [row,geo,tect].forEach(e=>{if(e)body.append(e)});
-   details.append(body);
-   frame.before(details);
+   const body=document.createElement('div');body.className='atlas-layer-body';
+   if(row)body.append(row);
+   const layers=document.createElement('fieldset');layers.className='atlas-layer-grid';
+   const legend=document.createElement('legend');legend.textContent='LAPISAN GEOLOGI & TEKTONIK';layers.append(legend);
+   [geo,tect].forEach(container=>{
+    if(!container)return;
+    container.querySelectorAll('label').forEach(label=>layers.append(label));
+    // Preserve output elements required by existing map scripts without
+    // exposing repeated technical status text in the interface.
+    container.querySelectorAll('#geo-status,#tect-status').forEach(el=>{
+      el.classList.add('atlas-status-sr-only');body.append(el);
+    });
+    container.querySelector('.tect-sources')?.remove();
+    container.remove();
+   });
+   body.append(layers);details.append(body);frame.before(details);
   }
   if(!earth)return;
   const launcher=document.createElement('button');
