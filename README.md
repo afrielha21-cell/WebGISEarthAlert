@@ -93,9 +93,6 @@ Folder `research/` menyimpan ringkasan metrik k=2..8 seluruh skenario, uji kesta
 
 ## WebGISEarthAlert — Atlas Earth
 Repository ini menyimpan seluruh aset riset BMKG 2016–2025 (termasuk `data/history/`)
-dan antarmuka Atlas Earth. Logo InaRISK dan BIG di header saat ini menggunakan
-**wordmark SVG ilustratif** (bukan salinan lambang resmi); ganti aset tersebut
-dengan file identitas resmi yang berizin bila tersedia.
-Tanya Earth adalah asistensi lokal berbasis indeks data EarthAlert, bukan layanan prediksi gempa.
+dan antarmuka Atlas Earth. Logo InaRISK BNPB dan BIG di header diperbarui dari gambar yang diberikan tim,\ndan disimpan sebagai aset mandiri agar tetap termuat pada GitHub Pages.\nTanya Earth menggabungkan indeks data BMKG dan pustaka edukasi kebumian terkurasi,\nbukan model AI generatif, layanan prediksi gempa, atau peringatan dini.
 Publikasi: GitHub Pages melalui workflow bootstrap-earthalert.yml.
 Sumber utama: https://repogempa.bmkg.go.id/eventcatalog
