@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="EarthAlert: atlas karakteristik aktivitas kegempaan Indonesia 2016–2025 berbasis K-Means, dengan studi kasus dampak dan panduan mitigasi kontekstual." name="description"/>
+<title>EarthAlert — Atlas Kegempaan &amp; Mitigasi Indonesia</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" crossorigin="anonymous" onerror="this.onerror=null;this.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'"/>
+<link href="styles.css?v=26.1" rel="stylesheet"/>
+<link href="assets/atlas-v27.css?v=27.0" rel="stylesheet"/>
+<!-- Leaflet dimuat tanpa memblokir fitur lain melalui ensureLeaflet() dalam app.js -->
+<script defer src="app.js?v=23.0"></script>
+<script defer src="assets/earthalert-enhancements.js?v=25.0"></script>
+<script defer src="assets/tanya-earth.js?v=23.0"></script>
+<script defer src="assets/decision-simulator.js?v=25.0"></script>
+<script defer src="assets/tectonic-context.js?v=26.1"></script>
+<script defer src="assets/atlas-v27.js?v=27.0"></script>
+</head>
+<body>
+<header class="masthead">
+<div class="shell mast-inner">
+<a aria-label="EarthAlert, halaman utama" class="brand" href="#atlas">
+<span aria-hidden="true" class="brand-mark"><svg fill="none" viewbox="0 0 38 38"><path d="M5 21h7l4-9 5 16 4-9h8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path><circle cx="19" cy="19" opacity=".33" r="17" stroke="currentColor" stroke-width="1.4"></circle></svg></span>
+<span><strong>EarthAlert</strong><small>Seismic Intelligence</small></span>
+</a>
+<nav aria-label="Navigasi utama" class="nav" id="nav">
+<button class="nav-item selected" data-nav="atlas" type="button">Atlas Earth</button>
+<button class="nav-item" data-nav="riwayat" type="button">Riwayat Gempa</button>
+<button class="nav-item" data-nav="dampak" type="button">Dampak Gempa</button>
+<button class="nav-item" data-nav="mitigasi" type="button">Wawasan Mitigasi</button>
+<button class="nav-item" data-nav="bmkg" type="button">Gempa Terkini BMKG</button>
+
+<button class="nav-item" data-nav="metodologi" type="button">Metodologi</button>
+</nav>
+<div class="brand-partners" aria-label="Sekolah dan institusi sumber data EarthAlert">
+<a href="https://mtsn17jkt.sch.id/" title="MTsN 17 Jakarta" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mtsn17.webp" alt="Logo MTsN 17 Jakarta" width="46" height="46"/></a>
+<a href="https://inarisk.bnpb.go.id/" title="InaRISK — BNPB" target="_blank" rel="noopener noreferrer"><img class="partner-inarisk" src="assets/logos/inarisk.svg" alt="Logo InaRISK BNPB" width="46" height="46"/></a>
+<a href="https://www.big.go.id/" title="Badan Informasi Geospasial" target="_blank" rel="noopener noreferrer"><img src="assets/logos/big.svg" alt="Logo BIG" width="46" height="46"/></a>
+<a href="https://www.bmkg.go.id/" title="Badan Meteorologi Klimatologi dan Geofisika" target="_blank" rel="noopener noreferrer"><img src="assets/logos/bmkg.webp" alt="Logo BMKG" width="46" height="46"/></a>
+<a href="https://kemenag.go.id/" title="Kementerian Agama" target="_blank" rel="noopener noreferrer"><img class="partner-kemenag" src="assets/logos/kemenag.webp" alt="Logo Kementerian Agama" width="55" height="55"/></a>
+</div>
+</div>
+</header>
+<main class="shell" data-earthalert-version="22.0">
+<div class="site-status" id="site-status" role="status">Memuat data riset EarthAlert…</div>
+<section aria-labelledby="atlasTitle" class="page active" id="page-atlas">
+<div class="page-head"><div><div class="eyebrow">ATLAS EARTH / INDONESIA 2016—2025</div><h1 id="atlasTitle">Membaca pola kegempaan, <span>bukan sekadar melihat titik.</span></h1><p>Peta interaktif K-Means dari katalog BMKG 2016–2025 dengan tiga indikator: frekuensi, magnitudo P90, dan kedalaman. Telusuri zona heksagon, titik episenter, atau kasus dampak historis.</p></div></div>
+<div class="stats-row" id="stats-row"><div class="stat"><span>REKAMAN BMKG 2016–2025</span><strong>126.686</strong><small>Seluruh magnitudo · 10 tahun penuh</small></div><div class="stat"><span>HEKSAGON BERLABEL</span><strong>333</strong><small>65 km · minimal 10 gempa M≥4</small></div><div class="stat"><span>K-MEANS · 3 INDIKATOR</span><strong>04</strong><small>Frekuensi · M P90 · kedalaman</small></div><div class="stat"><span>KASUS DAMPAK BMKG</span><strong>42</strong><small>Arsip kasus terpilih</small></div></div>
+<div class="workbench">
+<section aria-label="Peta atlas aktivitas gempa" class="map-panel">
+<div class="tool-row"><div class="tool-inline"><span class="tool-label">PETA</span><div aria-label="Basemap" class="toggle" role="group"><button class="toggle-item on" data-basemap="ocean" type="button">Ocean relief</button><button class="toggle-item" data-basemap="satellite" type="button">Satelit</button></div></div><div class="tool-inline"><span class="tool-label">MODE</span><div aria-label="Mode peta" class="toggle" role="group"><button class="toggle-item on" data-mapmode="clusters" type="button">Klaster</button><button class="toggle-item" data-mapmode="cases" type="button">Kasus dampak</button><button class="toggle-item" data-mapmode="events" type="button">Episenter M5,5+ (BMKG)</button></div></div></div>
+<div class="tool-row second"><div class="tool-inline"><label for="cluster-filter">KLASTER</label><select id="cluster-filter"><option value="all">Semua klaster</option><option value="A">A — Kedalaman relatif rendah</option><option value="B">B — P90 magnitudo relatif tinggi</option><option value="C">C — Kedalaman relatif besar</option><option value="D">D — Frekuensi tercatat relatif tinggi</option></select></div><div class="tool-inline"><label for="alpha-range">TRANSPARANSI ZONA <b id="alpha-label">75%</b></label><input id="alpha-range" max="95" min="50" step="5" type="range" value="75"/></div><div class="tool-inline check-row"><label><input checked="" id="zone-layer" type="checkbox"/> Layer zona</label><label><input checked="" id="markers-layer" type="checkbox"/> Titik klaster</label></div></div>
+<div class="geo-controls"><strong>Lapisan geologi · data resmi</strong><label><input id="geo-faults" type="checkbox"/> Sesar aktif &amp; patahan (InaRISK / PuSGeN 2024)</label><label><input id="geo-geology" type="checkbox"/> Geologi regional (BIG)</label><small id="geo-status" aria-live="polite">Informasi pendukung; tidak mengubah hasil K-Means.</small></div><div class="tectonic-extra" aria-label="Lapisan tektonik dan relief laut"><label><input id="tect-plates" type="checkbox"/> Batas lempeng tektonik</label><label><input id="tect-mega" type="checkbox"/> Zona subduksi / megathrust</label><label><input id="tect-relief" type="checkbox"/> Relief dasar laut &amp; palung</label><label><input id="tect-volcano" type="checkbox"/> Persebaran gunung api tipe A</label><small id="tect-status" aria-live="polite">Lapisan pelengkap dari sumber peta resmi.</small><div class="tect-sources">Sumber: <a href="https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/Tectonic_Plate_Boundaries/FeatureServer/0" target="_blank" rel="noopener noreferrer">USGS / Esri</a> · <a href="https://gis.bnpb.go.id/server/rest/services/inarisk/Faults/MapServer/0" target="_blank" rel="noopener noreferrer">BNPB InaRISK</a> · <a href="https://geoservices.big.go.id/gis/rest/services/PTRA/Atlas_250K_GunungApi/MapServer/7" target="_blank" rel="noopener noreferrer">BIG Atlas Gunung Api</a> · <a href="https://doc.arcgis.com/en/data-appliance/2025/maps/world-ocean-base.htm" target="_blank" rel="noopener noreferrer">Esri Ocean Relief</a></div></div><div class="map-frame"><div class="map-status" id="map-status" role="status" aria-live="polite" hidden></div><div id="atlasMap" aria-label="Peta interaktif Leaflet dengan basemap Ocean Relief atau Satelit dan data zona kegempaan BMKG"></div><div class="map-zoom"><button aria-label="Kembali ke tampilan Indonesia" title="Fokus kembali ke Indonesia" id="zoomHome" type="button">⌖</button><div class="map-place-badge" id="mapPlaceBadge" aria-live="polite">Lokasi zona akan muncul di sini</div></div><div class="map-caption">Peta interaktif Leaflet · Ocean Relief / Satelit (Esri) · Heksagon BMKG · Geser dan zoom bebas</div></div>
+<div aria-label="Legenda klaster" class="legend"><span><i style="--dot:#EF4444"></i>A · Kedalaman relatif rendah</span><span><i style="--dot:#F97316"></i>B · P90 magnitudo tinggi</span><span><i style="--dot:#22C55E"></i>C · Kedalaman relatif besar</span><span><i style="--dot:#D7A000"></i>D · Frekuensi tinggi</span></div>
+<section class="region-compare" aria-labelledby="compare-heading"><div class="compare-top"><span>PERBANDINGAN POLA KEGEMPAAN</span><h2 id="compare-heading">Bandingkan Dua Wilayah</h2><p>Pilih dua zona di Atlas Earth untuk melihat perbedaan frekuensi, magnitudo, kedalaman, klaster, dan konteks tektoniknya.</p></div><div class="compare-controls"><label>Zona A<select id="compare-a"><option>Memuat zona…</option></select></label><label>Zona B<select id="compare-b"><option>Memuat zona…</option></select></label></div><div class="compare-actions"><button type="button" id="compare-select-current">Gunakan zona peta sebagai A</button><button type="button" class="compare-primary" id="compare-run">Bandingkan →</button></div><p id="compare-feedback" class="compare-feedback"></p><div id="compare-result" aria-live="polite"></div></section>
+<section class="earth-panel" id="tanya-earth" aria-labelledby="earth-title">
+<div class="earth-panel-head"><div class="earth-panel-title"><span class="earth-panel-symbol" aria-hidden="true">✦</span><div><span class="earth-panel-eyebrow">ASISTEN DATA EARTHALERT</span><h2 id="earth-title">Tanya Earth</h2></div></div><span class="earth-data-label">Data BMKG</span></div>
+<p class="earth-panel-copy">Punya pertanyaan tentang gempa, klaster, dampak, atau tsunami? Tanya menggunakan data yang tersedia di EarthAlert.</p>
+<form id="earth-form" class="earth-form" autocomplete="off">
+<label class="earth-sr-only" for="earth-question">Pertanyaan untuk Tanya Earth</label>
+<input id="earth-question" type="search" placeholder="Contoh: Gempa terbesar terjadi di mana?" maxlength="220" required aria-describedby="earth-privacy"/>
+<button type="submit" id="earth-submit">Tanya Earth →</button>
+</form>
+<div class="earth-quick-label">COBA PERTANYAAN</div>
+<div class="earth-suggestions" id="earth-suggestions" aria-label="Contoh pertanyaan cepat"></div>
+<div id="earth-status" class="earth-status" role="status" aria-live="polite">Siap menelusuri data historis, klaster, dan arsip BMKG.</div>
+<div id="earth-answer" class="earth-answer" aria-live="polite" hidden></div>
+<p class="earth-disclaimer" id="earth-privacy">Jawaban dihitung dan ditelusuri dari data EarthAlert, tanpa mengirim pertanyaan ke layanan AI eksternal. Bukan prediksi, penilaian risiko resmi, atau peringatan dini.</p>
+</section>
+</section>
+<aside aria-live="polite" class="detail-panel" id="atlasDetail"><div class="overline">HASIL ANALISIS</div><div class="detail-subbrand">EarthAlert</div><h2>Temukan profil gempa di peta</h2><p class="muted">Klik titik berwarna, pilih kasus dampak, atau aktifkan episenter historis. Rincian muncul di sini tanpa menutupi peta.</p><div aria-hidden="true" class="empty-art">◎</div></aside>
+</div>
+<div class="below-note"><span class="signal-dot"></span> Data historis K-Means tidak digunakan untuk mengeluarkan peringatan dini atau memprediksi kejadian gempa. Lapisan dampak berasal dari katalog terpisah.</div>
+<section class="atlas-news context-panel" id="atlas-news"><div class="news-heading"><div><div class="overline">PENDUKUNG INTERPRETASI</div><h2>Kajian kejadian &amp; berita relevan</h2><p class="muted">Rujukan BMKG membantu memahami kejadian nyata di sekitar zona terpilih. Artikel tidak dipakai untuk melatih atau memvalidasi tingkat bahaya klaster.</p></div></div><div class="news-grid" id="news-grid"></div><div class="noaa-footer"><div><strong>Referensi tambahan: NOAA NCEI</strong><p>Katalog gempa signifikan internasional sebagai bacaan eksternal, bukan data pelatihan EarthAlert.</p></div><a href="https://www.ncei.noaa.gov/maps/hazards/" rel="noopener noreferrer" target="_blank">Buka katalog NOAA ↗</a></div></section></section>
+<section aria-labelledby="historyTitle" class="page" id="page-riwayat" hidden>
+<div class="page-head compact"><div><div class="eyebrow">RIWAYAT GEMPA · KATALOG REPOGEMPA BMKG</div><h1 id="historyTitle">Riwayat Gempa BMKG 2016–2026.</h1><p>Arsip kejadian tercatat dari RepoGempa BMKG. Pilih tahun, magnitudo, kedalaman, wilayah, serta urutan. Tahun 2026 baru sampai 12 Oktober; data tidak tersedia pada 52 tanggal historis tidak dianggap nol kejadian.</p></div></div>
+<section class="context-panel history-card">
+<div class="overline">RINGKASAN TAHUNAN</div>
+<h2>Frekuensi kejadian teramati per tahun</h2>
+<p class="muted">Angka adalah jumlah rekaman yang berhasil diunduh per tahun. Perubahan kelengkapan katalog, termasuk lonjakan rekaman M&lt;3 pada 2025, dapat memengaruhi perbandingan.</p>
+<div class="year-bars" id="history-year-bars"></div>
+</section>
+<section class="context-panel history-card table-card">
+<div class="catalog-controls history-controls">
+<div class="history-filter-grid">
+<div><label for="history-year-filter">1. Tahun (UTC)</label><select id="history-year-filter"><option value="all">Semua tahun (muat saat dipilih)</option></select></div>
+<div><label for="history-mag-filter">2. Magnitudo minimum</label><select id="history-mag-filter"><option value="0">Seluruh magnitudo</option><option value="3">M3+</option><option selected="" value="4">M4+</option><option value="4.5">M4,5+</option><option value="5">M5+</option><option value="5.5">M5,5+</option></select></div>
+<div><label for="history-depth-filter">3. Kedalaman</label><select id="history-depth-filter"><option value="all">Semua kedalaman</option><option value="shallow">Dangkal (≤70 km)</option><option value="medium">Menengah (70–300 km)</option><option value="deep">Dalam (&gt;300 km)</option></select></div>
+<div><label for="history-location-filter">4. Cari wilayah</label><input id="history-location-filter" placeholder="Contoh: Sulawesi, Jawa, Banda…" type="search"/></div>
+<div><label for="history-sort-filter">5. Urutkan</label><select id="history-sort-filter"><option value="latest">Terbaru</option><option value="oldest">Terlama</option><option value="mag">Magnitudo terbesar</option><option value="depth">Kedalaman terbesar</option></select></div>
+</div>
+</div>
+<div class="result-count" id="history-count"></div>
+<div class="history-table-wrap" id="history-table-wrap"></div>
+</section>
+</section>
+<section aria-labelledby="impactTitle" class="page" id="page-dampak" hidden>
+<div class="page-head compact"><div><div class="eyebrow">DOKUMENTASI KEJADIAN</div><h1 id="impactTitle">Dampak Gempa</h1><p>Jelajahi dampak gempa signifikan dan tsunami 2016–2025 dari dua katalog BMKG, lengkap dengan lokasi, parameter dan catatan pengamatannya.</p></div></div>
+<div class="catalog-layout"><div class="catalog-list-panel"><div class="catalog-controls"><label for="impact-search">Cari lokasi, tahun, dampak atau tsunami</label><input id="impact-search" placeholder="Misalnya: Lombok, sekolah, jembatan…" type="search"/><div class="select-split"><select aria-label="Jenis catatan" id="impact-kind"><option value="all">Semua peristiwa</option><option value="gempa">Gempa signifikan / merusak</option><option value="tsunami">Tsunami</option></select><select aria-label="Filter tahun dampak" id="impact-year"><option value="all">Semua tahun</option></select><select aria-label="Filter jenis kerusakan" id="impact-category"><option value="all">Semua jenis dampak</option></select></div></div><div class="result-count" id="impact-count"></div><div class="case-list" id="impact-list"></div></div><aside class="context-panel" id="impact-detail"><div class="overline">KASUS TERDOKUMENTASI</div><h2>Pilih satu kejadian</h2><p class="muted">Ringkasan dampak dan tindakan mitigasi akan tampil sesuai kondisi yang tercatat.</p></aside></div>
+</section>
+<section aria-labelledby="mitTitle" class="page" id="page-mitigasi" hidden>
+<div class="page-head compact"><div><div class="eyebrow">DARI ARSIP MENJADI LANGKAH NYATA</div><h1 id="mitTitle">Wawasan Mitigasi</h1><p>Pelajari kesiapsiagaan berbasis kasus gempa dan dua belas jenis ancaman bencana menurut rujukan BNPB.</p></div></div>
+<section class="decision-simulator" id="decision-simulator" aria-label="Simulasi Keputusan Saat Bencana"></section><section class="context-panel disaster-overview"><div class="overline">LITERASI BENCANA</div><h2>12 jenis ancaman bencana di Indonesia</h2><p class="muted">Referensi BNPB untuk pembelajaran; tidak dimasukkan sebagai variabel K-Means.</p><div id="disaster-grid" class="disaster-grid"></div><a target="_blank" rel="noopener noreferrer" href="https://bnpb.go.id/storage/app/media/uploads/documents/buku-renas-pb.pdf">Rencana Nasional Penanggulangan Bencana · BNPB ↗</a></section><div class="mitigation-layout"><div class="mitigation-left"><div aria-label="Kondisi mitigasi" class="segment-tabs" id="scenario-tabs" role="group"></div><div class="scenario-content" id="scenario-content"></div></div><aside class="context-panel" id="mitigation-case-detail"><div class="overline">CONTOH PERISTIWA</div><h2>Kasus yang menjadi rujukan</h2><p class="muted">Pilih salah satu kasus pada daftar di sebelah kiri untuk membaca dampak yang tercatat dan rekomendasi kontekstualnya.</p></aside></div>
+</section>
+
+<section aria-labelledby="bmkgTitle" class="page" id="page-bmkg" hidden><div class="page-head compact"><div><div class="eyebrow">SUMBER INFORMASI RESMI</div><h1 id="bmkgTitle">Gempa Terkini BMKG</h1><p>Tampilan snapshot kejadian resmi dari BMKG Open Data, <strong>terpisah dari arsip historis dan pemodelan K-Means</strong>. Waktu pembaruan ditampilkan apa adanya.</p></div></div><section class="context-panel bmkg-panel"><div class="bmkg-panel-head"><div class="overline">AKSES DATA BMKG</div><h2>Snapshot informasi gempa terbaru</h2><p class="muted">Klik Update untuk mencoba membaca feed resmi BMKG Open Data sesuai kategori. Jika browser membatasi akses lintas situs, sistem mencoba snapshot yang tersedia di hosting atau kamu dapat mengimpor JSON resmi BMKG. Fitur ini bukan pengambilan data historis RepoGempa.</p></div><div class="bmkg-toolbar"><div class="bmkg-toolbar-row"><label for="bmkg-category">Kategori:</label><select id="bmkg-category"><option value="gempa_terbaru">Gempa terbaru</option><option value="m5">Gempa M≥5</option><option value="gempa_dirasakan">Gempa dirasakan</option></select><button class="btn-lite" id="bmkg-fetch-btn" type="button">Update</button><span class="or-label">ATAU IMPOR JSON</span><input accept=".json,application/json" id="bmkg-import" type="file"/></div></div><div class="bmkg-status-line" id="bmkg-update">Pilih kategori lalu klik Update. Jika akses langsung dibatasi, snapshot hosting dan impor JSON tetap tersedia.</div><div class="bmkg-table-wrap"><table class="bmkg-table"><thead><tr><th>Waktu</th><th>Magnitude</th><th>Kedalaman</th><th>Wilayah</th><th>Potensi / Dirasakan</th></tr></thead><tbody id="bmkg-tbody"><tr><td colspan="5">Belum ada data — jalankan server lokal atau impor JSON.</td></tr></tbody></table></div><div class="bmkg-footnote">Referensi dan atribusi: <a href="https://data.bmkg.go.id/gempabumi/" rel="noopener noreferrer" target="_blank">BMKG Open Data ↗</a>. Status resmi gempabumi dan tsunami selalu mengikuti BMKG/InaTEWS, bukan EarthAlert.</div></section></section>
+
+<section aria-labelledby="metTitle" class="page" id="page-metodologi" hidden><div class="page-head compact"><div><div class="eyebrow">TRANSPARANSI PENELITIAN</div><h1 id="metTitle">Metodologi dan sumber data.</h1><p>Semua angka dan batasan sistem dijelaskan agar hasil dapat diuji ulang, bukan hanya dilihat sebagai visualisasi.</p></div></div><div class="methods-grid"><section class="context-panel"><div class="overline">ALUR ANALISIS 2016–2025</div><h2>K-Means dari katalog BMKG</h2><ol class="steps"><li>Ekspor katalog RepoGempa BMKG dan audit ID, tanggal, magnitudo, kedalaman, serta lokasi.</li><li>Gunakan 2016–2025 untuk pemodelan 10 tahun kalender; 2026 hanya untuk tab riwayat.</li><li>Uji batas magnitudo M≥3 dan M≥4; skenario atlas utama memakai M≥4.</li><li>Agregasi kejadian pada heksagon luas setara beradius 65 km, minimal 10 rekaman per sel.</li><li>Hitung frekuensi, magnitudo P90, median kedalaman; transformasi log untuk frekuensi dan kedalaman, lalu StandardScaler.</li><li>Uji k=2–8 melalui WCSS/Elbow, Silhouette, Davies-Bouldin, ukuran kelompok dan ARI leave-one-year-out.</li><li>Tampilkan profil empat klaster, bukti kejadian, dan edukasi mitigasi pada lapisan berbeda.</li></ol></section>
+<section class="context-panel"><div class="overline">PENENTUAN JUMLAH KLASTER</div><h2>Evaluasi k=2 sampai k=8</h2><div class="metric-comparison" role="group" aria-label="Perbandingan evaluasi jumlah klaster">
+<div class="metric-panel">
+<h3 class="metric-panel-title">Silhouette Score</h3>
+<p class="metric-panel-subtitle">Semakin tinggi, pemisahan klaster semakin baik.</p>
+<div class="metric-chart" id="metric-chart"></div>
+<p class="metric-chart-note">Nilai tertinggi pada k=4 (0,347). k=6 mendekati nilai tersebut, tetapi menghasilkan kelompok yang sangat kecil.</p>
+</div>
+<div class="metric-panel">
+<h3 class="metric-panel-title">Elbow (WCSS)</h3>
+<p class="metric-panel-subtitle">Penurunan WCSS menurut jumlah klaster.</p>
+<div class="elbow-chart" id="elbow-chart"></div>
+<p class="metric-chart-note">Berdasarkan WCSS model BMKG yang sama. k=4 ditandai; pemilihan model tetap mempertimbangkan metrik lainnya.</p>
+</div>
+</div><p class="muted small">Pada skenario heksagon M≥4, k=4 menghasilkan Silhouette 0,347 dan Davies–Bouldin 0,946. Median ARI penghilangan satu tahun ≈0,810. k=6 hampir setara pada Silhouette, tetapi menghasilkan kelompok sangat kecil. Hasil adalah profil seismisitas, bukan kelas risiko.</p></section>
+<section class="context-panel profile-method-panel"><div class="overline">PROFIL EMPIRIS</div><h2>Empat kelompok heksagon</h2><div class="profile-table-wrap"><table class="profile-method-table"><thead><tr><th>Klaster</th><th>Heksagon</th><th>Median jumlah M≥4</th><th>Median P90 magnitudo</th><th>Median kedalaman</th></tr></thead><tbody id="method-profiles"></tbody></table></div><p class="muted small">Angka median dihitung antarsel per klaster; tidak diurutkan sebagai tingkat bahaya atau tingkat keselamatan.</p></section>
+<section class="context-panel"><div class="overline">KUALITAS DATA &amp; BATASAN</div><h2>Cakupan, audit, dan ketidakpastian</h2><p>Ekspor RepoGempa BMKG menghasilkan <strong>138.229 rekaman unik</strong> hingga 12 Oktober 2026 dan <strong>126.686 rekaman</strong> untuk model 2016–2025. Dari periode model, terdapat <strong>22.422 kejadian M≥4</strong>; sebanyak <strong>333 heksagon</strong> memenuhi minimal 10 kejadian per sel.</p><p>CSV digabung dan diaudit berdasarkan identitas, waktu, koordinat, magnitudo, kedalaman, serta rekaman berulang. Sebanyak <strong>52 tanggal tanpa catatan ekspor</strong> berarti data tidak tersedia, bukan nol gempa. Perubahan kelengkapan katalog, terutama pada 2025 dan magnitudo kecil, membatasi penafsiran tren tahunan.</p><p>Model memakai frekuensi M≥4, magnitudo P90, dan median kedalaman; transformasi log1p dilakukan untuk frekuensi dan kedalaman, diikuti StandardScaler. Pemilihan <strong>k=4</strong> mempertimbangkan Silhouette 0,347, Davies–Bouldin 0,946, ukuran setiap klaster, dan kestabilan pengelompokan.</p><p>Dua katalog BMKG mencatat <strong>kejadian signifikan/merusak serta tsunami historis</strong>, bukan semua gempa. Dampak, korban, dan tsunami bukan hasil perhitungan K-Means dan tidak digunakan untuk melatih model. Angka katalog dapat merujuk satu kejadian atau satu rangkaian dan harus dibaca bersama catatan aslinya.</p><p>Peta sesar aktif InaRISK/BNPB dan geologi regional BIG merupakan <strong>lapisan informasi pendukung</strong> dengan skala serta kelengkapan berbeda. Kedekatan lokasi terhadap sesar bukan bukti pasti sumber gempa atau tingkat risiko. EarthAlert bukan sistem prediksi, penetapan risiko resmi, ataupun peringatan dini.</p></section>
+<section class="context-panel"><div class="overline">REFERENSI RESMI</div><h2>Sumber data dan pedoman mitigasi</h2><div class="links-list"><a href="https://repogempa.bmkg.go.id/eventcatalog" rel="noopener noreferrer" target="_blank">RepoGempa BMKG · katalog historis ↗</a><a href="https://data.bmkg.go.id/gempabumi/" rel="noopener noreferrer" target="_blank">BMKG Open Data · kejadian terkini ↗</a><a href="https://www.bmkg.go.id/gempabumi/mitigasi/antisipasi-gempabumi" rel="noopener noreferrer" target="_blank">Pedoman keselamatan BMKG ↗</a><a href="https://www.bmkg.go.id/gempabumi/mitigasi/edukasi-gempabumi-tsunami" rel="noopener noreferrer" target="_blank">Edukasi tsunami BMKG ↗</a><a href="https://inarisk.bnpb.go.id/" rel="noopener noreferrer" target="_blank">InaRISK BNPB (kajian risiko terpisah) ↗</a></div></section></div></section>
+</main>
+<footer><div class="shell foot"><div><strong>EarthAlert</strong><span> · OMI RISET MTsN 17 Jakarta</span><p>Riset pendidikan dan literasi mitigasi kegempaan Indonesia.</p></div><div><a href="#metodologi">Metode &amp; sumber</a><a href="https://www.bmkg.go.id/gempabumi" rel="noopener noreferrer" target="_blank">BMKG resmi ↗</a></div></div></footer>
+</body></html>

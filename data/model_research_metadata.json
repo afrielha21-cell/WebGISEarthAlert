@@ -1,0 +1,35 @@
+{
+  "source": "BMKG RepoGempa exported CSV; not a complete or authoritative hazard catalog",
+  "source_file": "CSV gabungan BMKG RepoGempa yang diaudit untuk EarthAlert (master disimpan pada paket audit penelitian terpisah)",
+  "start_utc": "2016-01-01T00:00:00Z",
+  "end_utc": "2025-12-31T23:59:59Z",
+  "historical_unique_event_count": 126686,
+  "missing_days_in_original_audit": 52,
+  "coordinate_region": [
+    95.0,
+    -11.0,
+    141.0,
+    6.0
+  ],
+  "units": [
+    "GRID_1DEG",
+    "HEX_EQAREA_65KM"
+  ],
+  "hex_crs": "EPSG:6933 equal-area",
+  "hex_circumradius_m": 65000.0,
+  "features": {
+    "frequency": "ln(1+number of catalog records with magnitude>=floor) per spatial unit over 2016-2025",
+    "magnitude": "90th percentile catalog magnitude",
+    "depth": "ln(1+median depth km) per spatial unit"
+  },
+  "minimum_record_count_per_unit": 10,
+  "model": "scikit-learn KMeans(k=2..8, n_init=30, random_state=42)",
+  "validation": "WCSS, Silhouette, Davies-Bouldin, Calinski-Harabasz and leave-one-year-out ARI on matching cells",
+  "scope_limitations": [
+    "Historical clustering is not earthquake hazard, risk, safe/unsafe or building damage estimation.",
+    "Absolute frequencies not corrected for incomplete catalog or changing completeness.",
+    "Raw types of earthquake magnitude may vary; 2016-25 Mag Type missing in the files.",
+    "No geologic faults or plate boundaries used for clustering.",
+    "Records on dates with no exported data cannot be assumed to be true zero events."
+  ]
+}

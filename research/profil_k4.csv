@@ -1,0 +1,5 @@
+﻿Kelas,Profil,Warna,Jumlah_heksagon,Median_kejadian_M4,Median_P90_Magnitudo,Median_kedalaman_km
+A,Kedalaman Relatif Rendah,#EF4444,134,23.0,4.82,10.75
+B,Magnitudo P90 Relatif Tinggi,#F97316,33,18.0,5.3,29.0
+C,Kedalaman Relatif Besar,#22C55E,63,35.0,4.8,170.0
+D,Frekuensi Tercatat Relatif Tinggi,#FACC15,103,106.0,4.9,20.0
