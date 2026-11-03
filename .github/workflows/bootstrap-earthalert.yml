@@ -25,6 +25,9 @@ jobs:
           test -f assets/logos/inarisk.svg
           test -f assets/tanya-earth.js
           test -f data/history/2025.json
+          node --check app.js
+          node --check assets/atlas-v27.js
+          node --check assets/tanya-earth.js
           python3 - <<'PY'
           from pathlib import Path
           s=Path('index.html').read_text()
