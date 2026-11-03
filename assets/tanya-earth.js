@@ -1,10 +1,10 @@
 /* Tanya Earth — asisten penelusuran data lokal EarthAlert.
-   Tidak memakai API AI pihak ketiga, tidak mengarang angka, dan hanya menjawab dari
-   JSON RepoGempa/Katalog BMKG yang tersedia di situs. */
+   Tidak memakai API AI pihak ketiga dan tidak mengarang angka. Menjawab dari
+   katalog BMKG dan pustaka edukasi ilmu kebumian berbasis sumber resmi. */
 (function(root){
  'use strict';
  const doc=typeof document==='undefined'?null:document;
- const source={repo:{label:'RepoGempa BMKG / Riwayat Gempa',url:'#riwayat'},atlas:{label:'Atlas ML BMKG 2016–2025',url:'#atlas'},impact:{label:'Katalog Gempabumi Signifikan dan Merusak BMKG',url:'#dampak'},tsunami:{label:'Katalog Tsunami Indonesia BMKG · tab Dampak Gempa',url:'#dampak'},method:{label:'Metodologi EarthAlert',url:'#metodologi'},latest:{label:'Gempa Terkini BMKG (snapshot)',url:'#bmkg'},mitigation:{label:'Wawasan Mitigasi',url:'#mitigasi'}};
+ const source={repo:{label:'RepoGempa BMKG / Riwayat Gempa',url:'#riwayat'},atlas:{label:'Atlas Earth BMKG 2016–2025',url:'#atlas'},impact:{label:'Katalog Gempabumi Signifikan dan Merusak BMKG',url:'#dampak'},tsunami:{label:'Katalog Tsunami Indonesia BMKG · tab Dampak Gempa',url:'#dampak'},method:{label:'Metodologi EarthAlert',url:'#metodologi'},latest:{label:'Gempa Terkini BMKG (snapshot)',url:'#bmkg'},mitigation:{label:'Wawasan Mitigasi',url:'#mitigasi'},bmkg:{label:'BMKG — edukasi gempabumi',url:'https://www.bmkg.go.id/gempabumi'},geology:{label:'PVMBG / MAGMA Indonesia',url:'https://magma.esdm.go.id/'},volcanicTsunami:{label:'BMKG — Tsunami Selat Sunda 2018',url:'https://www.bmkg.go.id/berita/utama/bmkg-ungkap-kronologi-tsunami-selat-sunda'},noaa:{label:'NOAA — Tsunami',url:'https://www.noaa.gov/education/resource-collections/ocean-coasts/tsunamis'}};
  const qaQuestions=[
   'Wilayah mana paling sering mengalami gempa?',
   'Gempa terbesar di Indonesia dalam data EarthAlert?',
@@ -14,7 +14,12 @@
   'Apa gempa terkini yang tercatat BMKG?',
   'Berapa jumlah gempa M≥4 pada 2023?',
   'Apa saja kejadian tsunami yang tercatat?',
-  'Apa itu magnitudo P90 dan kedalaman?',
+  'Apa itu megathrust dan bagaimana terbentuk?',
+  'Apa arti P90 magnitudo di Atlas Earth?',
+  'Gunung apa yang pernah memicu tsunami?',
+  'Apakah letusan gunung bisa menyebabkan gempa?',
+  'Mengapa tidak semua gempa memicu tsunami?',
+  'Apa perbedaan magnitudo dan intensitas?',
   'Bagaimana cara kerja K-Means di EarthAlert?'
  ];
  const fnum=(n,d=0)=>Number(n).toLocaleString('id-ID',{maximumFractionDigits:d,minimumFractionDigits:d});
@@ -206,6 +211,25 @@
     return w;
   }).trim();
  }
+ const educationalExpanded=[
+  {keys:['megathrust','mega thrust','mega trust','megatrust','subduksi','zona penunjaman','lempeng bertumbukan'],title:'Apa itu megathrust?',text:'Megathrust adalah bidang kontak sesar sangat besar di zona subduksi, yaitu tempat satu lempeng tektonik menunjam ke bawah lempeng lain. Jika bidang ini terkunci dan kemudian bergeser tiba-tiba, dapat terjadi gempa besar. Gempa di bawah laut yang menggeser dasar laut berpotensi memicu tsunami, tetapi tidak semua gempa megathrust menghasilkan tsunami. EarthAlert tidak memprediksi kapan gempa akan terjadi.',sources:['bmkg','atlas']},
+  {keys:['p90','p 90','persentil 90','percentile 90','magnitudo persentil','magnitudo p','p90 metn','p90 magnitudo','p90 itu'],title:'Apa arti magnitudo P90?',text:'P90 adalah persentil ke-90 dari sekumpulan magnitudo gempa pada satu zona heksagon. Artinya sekitar 90% kejadian tercatat bermagnitudo sama atau lebih rendah dari nilai P90 dan sekitar 10% di atasnya. Misalnya P90 = M5,2 berarti 9 dari 10 kejadian berada pada M5,2 atau lebih kecil. Ini BUKAN peluang gempa M5,2 terjadi, bukan prediksi, dan bukan magnitudo maksimum.',sources:['method','atlas']},
+  {keys:['gunung mana','gunung apa','gunung yang','gunung pernah','gunung menyebabkan tsunami','gunung memicu tsunami','letusan gunung tsunami','krakatau','krakatao','anak krakatau','tsunami vulkanik'],title:'Contoh gunung api yang memicu tsunami',text:'Contoh yang terdokumentasi adalah Gunung Anak Krakatau di Selat Sunda. Pada 22 Desember 2018, runtuhnya sebagian lereng yang berkaitan dengan aktivitas erupsi memicu tsunami di pesisir Banten dan Lampung. Ini bukan tsunami akibat gempa tektonik. Gempa vulkanik dan tsunami adalah dua fenomena berbeda; tidak setiap letusan menimbulkan tsunami.',sources:['volcanicTsunami','geology','tsunami']},
+  {keys:['gempa vulkanik','gempa akibat letusan','gempa karena gunung','gunung menyebabkan gempa','gunung memicu gempa','letusan bisa gempa','erupsi menyebabkan gempa','gunung meletus menyebabkan gempa','gempa gunung'],title:'Bisakah gunung api menyebabkan gempa?',text:'Ya. Pergerakan magma, tekanan gas, dan perubahan batuan di sekitar gunung api dapat menimbulkan gempa vulkanik. Aktivitas tersebut dipantau antara lain oleh PVMBG. Gempa vulkanik tidak sama dengan gempa tektonik akibat pergerakan sesar atau lempeng. Informasi aktivitas gunung api terkini harus diperiksa di MAGMA Indonesia/PVMBG.',sources:['geology','bmkg']},
+  {keys:['kenapa tidak semua gempa','mengapa tidak semua gempa','gempa tidak tsunami','syarat terjadi tsunami','gempa memicu tsunami','gempa penyebab tsunami'],title:'Mengapa tidak semua gempa memicu tsunami?',text:'Tsunami akibat gempa umumnya membutuhkan perpindahan massa air secara tiba-tiba, misalnya karena dasar laut terangkat atau turun. Magnitudo saja tidak menentukan: lokasi, kedalaman, mekanisme sesar, dan perubahan dasar laut juga berpengaruh. Longsoran dan aktivitas gunung api pun dapat memicu tsunami tanpa gempa tektonik.',sources:['bmkg','noaa','mitigation']},
+  {keys:['magnitudo dan intensitas','magnitudo vs intensitas','magnitude dan mmi','apa itu mmi','skala mmi','intensitas gempa'],title:'Magnitudo dan intensitas gempa itu berbeda',text:'Magnitudo menggambarkan ukuran gempa pada sumbernya. Intensitas menggambarkan kuatnya guncangan dan dampak di lokasi tertentu, misalnya skala MMI; intensitas satu gempa bisa berbeda antarkota karena jarak, jenis tanah, dan bangunan. Dua angka ini tidak boleh disamakan.',sources:['bmkg']},
+  {keys:['kedalaman dangkal','gempa dangkal','gempa dalam','kedalaman hiposentrum','kedalaman episentrum','hiposentrum','episentrum'],title:'Episentrum, hiposentrum, dan kedalaman',text:'Hiposentrum adalah titik sumber gempa di dalam bumi, sedangkan episentrum adalah titik di permukaan bumi tepat di atas hiposentrum. Kedalaman gempa adalah jarak vertikal sumber dari permukaan. Gempa dangkal sering menghasilkan guncangan kuat di dekat sumber, namun dampaknya tetap dipengaruhi banyak faktor.',sources:['bmkg','method']},
+  {keys:['aftershock','gempa susulan','foreshock','gempa pendahuluan'],title:'Gempa susulan dan gempa pendahuluan',text:'Gempa susulan (aftershock) terjadi setelah suatu gempa utama pada area terkait karena penyesuaian tegangan batuan. Gempa pendahuluan (foreshock) hanya dapat dikenali sebagai pendahuluan setelah diketahui ada gempa utama yang lebih besar; tidak setiap gempa kecil menandakan gempa besar akan datang.',sources:['bmkg']},
+  {keys:['lempeng tektonik','lempeng bumi','mengapa indonesia banyak gempa','kenapa indonesia banyak gempa','cincin api','ring of fire'],title:'Mengapa Indonesia banyak gempa?',text:'Indonesia berada pada wilayah pertemuan sejumlah sistem lempeng tektonik dan sesar aktif. Pergerakan di zona subduksi serta patahan darat atau laut menyebabkan banyak kejadian gempa. Aktivitas gunung api juga berkaitan dengan proses tektonik, tetapi mekanisme gempa tektonik dan vulkanik tidak sama.',sources:['bmkg','atlas','geology']},
+  {keys:['elbow','silhouette','davies bouldin','wcss','jumlah klaster','kenapa empat klaster'],title:'Bagaimana jumlah klaster dipilih?',text:'Elbow mengamati perubahan jumlah variasi dalam kelompok (WCSS) ketika nilai k bertambah. Silhouette menilai seberapa dekat satu zona dengan kelompoknya dibandingkan kelompok lain. EarthAlert juga memeriksa Davies–Bouldin, ukuran kelompok dan kestabilan antarperiode sebelum memilih empat klaster untuk model 2016–2025.',sources:['method']},
+  {keys:['apa itu heksagon','heksagon itu','kenapa heksagon','zona hexagon','sel heksagon'],title:'Mengapa data dipetakan dalam heksagon?',text:'Heksagon adalah sel peta bersisi enam. Dalam EarthAlert, kejadian gempa dikelompokkan per sel agar pola frekuensi, P90 magnitudo, dan median kedalaman dapat dibandingkan antarwilayah. Heksagon merupakan unit analisis spasial, bukan batas administratif ataupun zona bahaya resmi.',sources:['atlas','method']},
+  {keys:['apa itu sesar','sesar geser','sesar naik','sesar turun','patahan bumi','patahan aktif','sesar aktif'],title:'Apa itu sesar?',text:'Sesar adalah bidang rekahan batuan yang mengalami pergeseran. Secara sederhana ada sesar naik, turun, dan mendatar, tergantung arah pergerakan. Pergerakan mendadak pada sesar dapat memicu gempa tektonik. Peta sesar adalah lapisan referensi, bukan bukti kepastian lokasi gempa berikutnya.',sources:['bmkg','atlas']},
+  {keys:['tsunami surut','laut surut','tanda tsunami','pertanda tsunami','tanda alam tsunami'],title:'Apa tanda alami tsunami?',text:'Tanda yang perlu diwaspadai di pantai antara lain gempa terasa sangat kuat atau lama, air laut mendadak surut atau naik tidak biasa, serta suara gemuruh dari arah laut. Tidak semua tsunami didahului air surut. Jika merasakan gempa kuat atau lama di pesisir, segera menjauh dari pantai dan menuju tempat tinggi tanpa menunggu pemberitahuan.',sources:['mitigation','bmkg']},
+  {keys:['likuefaksi','likuifaksi','tanah mencair','tanah jadi cair'],title:'Apa itu likuefaksi?',text:'Likuefaksi adalah kondisi ketika tanah berpasir yang jenuh air kehilangan kekuatan akibat guncangan kuat, sehingga dapat bergerak seperti cairan dan merusak bangunan atau infrastruktur. Tingkat kerentanan bergantung pada kondisi tanah dan air tanah; tidak bisa disimpulkan hanya dari warna klaster EarthAlert.',sources:['bmkg','mitigation']},
+  {keys:['gunung meletus','gunung api meletus','kenapa gunung meletus','penyebab letusan','erupsi gunung'],title:'Mengapa gunung api meletus?',text:'Erupsi terjadi ketika magma, gas, atau material vulkanik terdorong keluar melalui sistem gunung api. Penyebab dan gaya erupsi berbeda setiap gunung. Untuk aktivitas atau status terbaru, lihat pemantauan resmi PVMBG melalui MAGMA Indonesia; EarthAlert tidak menyediakan prakiraan letusan.',sources:['geology']},
+  {keys:['gelombang p','gelombang s','gelombang seismik','p wave','s wave'],title:'Apa itu gelombang seismik P dan S?',text:'Gelombang P (primer) merambat lebih cepat dan bisa melewati padat maupun cair. Gelombang S (sekunder) lebih lambat dan terutama merambat melalui padatan. Perbedaan waktu kedatangan membantu analisis lokasi sumber gempa; keduanya tidak sama dengan P90 magnitudo.',sources:['bmkg']},
+  {keys:['apakah gempa bisa diprediksi','kapan gempa besar','kapan megathrust','prediksi megathrust','gempa akan terjadi','tahun depan gempa'],title:'Belum ada metode pasti untuk menentukan waktu gempa',text:'Penelitian dapat memetakan sumber gempa, kecenderungan kejadian, dan skenario bahaya, tetapi tidak dapat memastikan tanggal, jam, lokasi, serta magnitudo gempa berikutnya. EarthAlert menampilkan analisis historis, bukan ramalan. Untuk peringatan dini dan keselamatan ikuti BMKG dan BPBD.',sources:['bmkg','method']}
+ ];
  const educational=[
   {keys:['apa itu sesar','apa itu patahan','sesar aktif','patahan aktif','geologi'],title:'Mengenal sesar aktif dan geologi',text:'Sesar merupakan rekahan batuan yang mengalami pergeseran. Sesar aktif adalah sesar yang mempunyai bukti aktivitas geologi. Peta sesar dan geologi pada Atlas ML merupakan bahan belajar dari sumber resmi, terpisah dari tiga indikator K-Means.',sources:['atlas','method']},
   {keys:['12 jenis','dua belas','ancaman bencana','jenis bencana'],title:'Dua belas jenis ancaman bencana',text:'Menurut pengelompokan pada Rencana Nasional Penanggulangan Bencana BNPB: gempa bumi, tsunami, letusan gunung api, tanah longsor, banjir, banjir bandang, kekeringan, cuaca ekstrem, gelombang ekstrem dan abrasi, kebakaran hutan/lahan, epidemi/wabah penyakit, dan gagal teknologi.',sources:['mitigation']},
@@ -219,7 +243,8 @@
  ];
  function educationalAnswer(q){
   const n=norm(q);
-  for(const row of educational){if(row.keys.some(k=>n.includes(norm(k))))return resp(row.title,row.text,{sources:idxSource(...row.sources),status:'Penjelasan berdasarkan sumber'});}
+  for(const row of educationalExpanded){if(row.keys.some(k=>n.includes(norm(k))))return resp(row.title,row.text,{sources:idxSource(...row.sources),status:'Penjelasan umum'});}
+  for(const row of educational){if(row.keys.some(k=>n.includes(norm(k))))return resp(row.title,row.text,{sources:idxSource(...row.sources),status:'Penjelasan umum'});}
   if(/\b(kamu|aku|saya|namaku|nama saya|umurku|tinggal|alamat|cinta|lelucon|joke)\b/.test(n))return resp('Aku membantu membaca data EarthAlert','Aku tidak memiliki data identitas, alamat, atau kondisi pribadi pengguna. Aku bisa membantu pertanyaan gempa, katalog BMKG, sesar, K-Means, tsunami, dan wawasan mitigasi.',{sources:idxSource('atlas','method')});
   return null;
  }
@@ -255,14 +280,14 @@
   const input=doc.getElementById('earth-question'),status=doc.getElementById('earth-status'),submit=doc.getElementById('earth-submit');
   const sugg=doc.getElementById('earth-suggestions');
   const indexPromise=fetch('data/tanya_earth_index.json').then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()});
-  const suggestions=qaQuestions.slice(0,6);
+  const suggestions=qaQuestions.slice(0,8);
   for(const q of suggestions){const b=doc.createElement('button');b.type='button';b.className='earth-suggestion';b.textContent=q;b.addEventListener('click',()=>{input.value=q;form.requestSubmit();});sugg.append(b)}
   let busy=false;
   form.addEventListener('submit',async ev=>{
    ev.preventDefault();if(busy)return;
    const question=input.value.trim();if(!question){input.focus();return}
    busy=true;submit.disabled=true;submit.textContent='Mencari…';status.textContent='Membaca data EarthAlert…';
-   try{const idx=await indexPromise;const ans=await answer(question,idx,s=>{status.textContent=s});render(ans);status.textContent='Jawaban disusun dari data sumber yang tersedia.'}
+   try{const idx=await indexPromise;const ans=await answer(question,idx,s=>{status.textContent=s});render(ans);status.textContent='Jawaban dari data EarthAlert atau pustaka pengetahuan kebumian.'}
    catch(err){render(resp('Data belum berhasil dibaca','Permintaan tidak dapat diselesaikan karena berkas sumber gagal dibuka. Coba refresh halaman dan periksa koneksi.',{status:'Data tidak tersedia',sources:idxSource('repo')}));status.textContent='Gagal membuka data: '+err.message}
    finally{busy=false;submit.disabled=false;submit.textContent='Tanya Earth →'}
   });
