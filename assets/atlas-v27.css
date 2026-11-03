@@ -1,0 +1,23 @@
+/* Atlas Earth compact control centre and Atlas-only chatbot */
+.brand-partners{gap:7px}
+.brand-partners img{width:42px;height:42px;object-fit:contain}
+.brand-partners img.partner-kemenag{width:53px;height:53px}
+.brand-partners img.partner-inarisk{width:50px;max-width:50px}
+@media(max-width:1150px){.brand-partners img{width:34px;height:34px}.brand-partners img.partner-kemenag{width:42px;height:42px}.brand-partners img.partner-inarisk{width:40px;height:40px}}
+@media(max-width:570px){.brand-partners{gap:3px}.brand-partners img{width:27px;height:27px}.brand-partners img.partner-kemenag{width:34px;height:34px}.brand-partners img.partner-inarisk{width:34px;height:34px}}
+.atlas-layer-center{border:1px solid #d9e6ec;border-radius:12px;background:#f9fcff;margin:10px 0 14px;overflow:hidden}
+.atlas-layer-center>summary{cursor:pointer;padding:12px 15px;color:#19475d;font-weight:700;font-size:12px;list-style:none;display:flex;justify-content:space-between}
+.atlas-layer-center>summary:after{content:'⌄';font-size:17px}
+.atlas-layer-center[open]>summary:after{content:'⌃'}
+.atlas-layer-body{padding:2px 12px 13px;display:grid;gap:10px}
+.atlas-layer-center .tool-row.second{display:flex;flex-wrap:wrap;margin:0;gap:10px}
+.atlas-layer-center .geo-controls,.atlas-layer-center .tectonic-extra{margin:0}
+.earth-launcher{position:fixed;right:22px;bottom:22px;z-index:1600;border:0;border-radius:100px;background:linear-gradient(130deg,#075c83,#159aaf);color:white;box-shadow:0 12px 36px #0b426b42;padding:13px 19px;display:flex;align-items:center;gap:9px;font:700 13px Poppins,sans-serif;cursor:pointer}
+.earth-launcher>span:first-child{font-size:21px}
+.earth-launcher[hidden]{display:none!important}
+.earth-popover{position:fixed!important;right:20px;bottom:84px;z-index:1601;width:min(430px,calc(100vw - 26px));max-height:min(76vh,670px);overflow-y:auto;border:1px solid #c9dee8;border-radius:18px;box-shadow:0 22px 70px #123f5860;margin:0!important;background:white!important;padding:18px!important}
+.earth-popover[hidden]{display:none!important}
+.earth-popover .earth-panel-head{position:relative;padding-right:28px}
+.earth-close{position:absolute;right:0;top:0;border:0;background:#eaf2f5;width:26px;height:26px;cursor:pointer;border-radius:50%;font-size:19px;color:#1c5068}
+.earth-popover .earth-answer{max-height:260px;overflow:auto}
+@media(max-width:570px){.earth-launcher{right:12px;bottom:12px}.earth-popover{right:10px;bottom:72px;width:calc(100vw - 20px);max-height:78vh}}
