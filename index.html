@@ -11,15 +11,15 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" crossorigin="anonymous" onerror="this.onerror=null;this.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'"/>
-<link href="styles.css?v=26.1" rel="stylesheet"/>
-<link href="assets/atlas-v27.css?v=27.0" rel="stylesheet"/>
+<link href="styles.css?v=28.0" rel="stylesheet"/>
+<link href="assets/atlas-v27.css?v=28.0" rel="stylesheet"/>
 <!-- Leaflet dimuat tanpa memblokir fitur lain melalui ensureLeaflet() dalam app.js -->
 <script defer src="app.js?v=23.0"></script>
 <script defer src="assets/earthalert-enhancements.js?v=25.0"></script>
-<script defer src="assets/tanya-earth.js?v=23.0"></script>
+<script defer src="assets/tanya-earth.js?v=28.0"></script>
 <script defer src="assets/decision-simulator.js?v=25.0"></script>
 <script defer src="assets/tectonic-context.js?v=26.1"></script>
-<script defer src="assets/atlas-v27.js?v=27.0"></script>
+<script defer src="assets/atlas-v27.js?v=28.0"></script>
 </head>
 <body>
 <header class="masthead">
@@ -38,9 +38,9 @@
 <button class="nav-item" data-nav="metodologi" type="button">Metodologi</button>
 </nav>
 <div class="brand-partners" aria-label="Sekolah dan institusi sumber data EarthAlert">
-<a href="https://mtsn17jkt.sch.id/" title="MTsN 17 Jakarta" target="_blank" rel="noopener noreferrer"><img src="assets/logos/mtsn17.webp" alt="Logo MTsN 17 Jakarta" width="46" height="46"/></a>
-<a href="https://inarisk.bnpb.go.id/" title="InaRISK — BNPB" target="_blank" rel="noopener noreferrer"><img class="partner-inarisk" src="assets/logos/inarisk.svg" alt="Logo InaRISK BNPB" width="46" height="46"/></a>
-<a href="https://www.big.go.id/" title="Badan Informasi Geospasial" target="_blank" rel="noopener noreferrer"><img src="assets/logos/big.svg" alt="Logo BIG" width="46" height="46"/></a>
+<a href="https://mtsn17jkt.sch.id/" title="MTsN 17 Jakarta" target="_blank" rel="noopener noreferrer"><img class="partner-school" src="assets/logos/mtsn17.webp" alt="Logo MTsN 17 Jakarta" width="46" height="46"/></a>
+<a href="https://inarisk.bnpb.go.id/" title="InaRISK — BNPB" target="_blank" rel="noopener noreferrer"><img class="partner-inarisk" src="assets/logos/inarisk.svg?v=28.0" alt="Logo InaRISK BNPB" width="46" height="46"/></a>
+<a href="https://www.big.go.id/" title="Badan Informasi Geospasial" target="_blank" rel="noopener noreferrer"><img class="partner-big" src="assets/logos/big.svg?v=28.0" alt="Logo BIG" width="46" height="46"/></a>
 <a href="https://www.bmkg.go.id/" title="Badan Meteorologi Klimatologi dan Geofisika" target="_blank" rel="noopener noreferrer"><img src="assets/logos/bmkg.webp" alt="Logo BMKG" width="46" height="46"/></a>
 <a href="https://kemenag.go.id/" title="Kementerian Agama" target="_blank" rel="noopener noreferrer"><img class="partner-kemenag" src="assets/logos/kemenag.webp" alt="Logo Kementerian Agama" width="55" height="55"/></a>
 </div>
@@ -49,7 +49,7 @@
 <main class="shell" data-earthalert-version="22.0">
 <div class="site-status" id="site-status" role="status">Memuat data riset EarthAlert…</div>
 <section aria-labelledby="atlasTitle" class="page active" id="page-atlas">
-<div class="page-head"><div><div class="eyebrow">ATLAS EARTH / INDONESIA 2016—2025</div><h1 id="atlasTitle">Membaca pola kegempaan, <span>bukan sekadar melihat titik.</span></h1><p>Peta interaktif K-Means dari katalog BMKG 2016–2025 dengan tiga indikator: frekuensi, magnitudo P90, dan kedalaman. Telusuri zona heksagon, titik episenter, atau kasus dampak historis.</p></div></div>
+<div class="page-head"><div><div class="eyebrow">ATLAS EARTH / INDONESIA 2016—2025</div><h1 id="atlasTitle">Membaca pola kegempaan, <span>bukan sekadar melihat titik.</span></h1></div></div>
 <div class="stats-row" id="stats-row"><div class="stat"><span>REKAMAN BMKG 2016–2025</span><strong>126.686</strong><small>Seluruh magnitudo · 10 tahun penuh</small></div><div class="stat"><span>HEKSAGON BERLABEL</span><strong>333</strong><small>65 km · minimal 10 gempa M≥4</small></div><div class="stat"><span>K-MEANS · 3 INDIKATOR</span><strong>04</strong><small>Frekuensi · M P90 · kedalaman</small></div><div class="stat"><span>KASUS DAMPAK BMKG</span><strong>42</strong><small>Arsip kasus terpilih</small></div></div>
 <div class="workbench">
 <section aria-label="Peta atlas aktivitas gempa" class="map-panel">
