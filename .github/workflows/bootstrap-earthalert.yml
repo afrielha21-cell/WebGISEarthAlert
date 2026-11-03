@@ -1,48 +1,41 @@
-name: Migrate and publish EarthAlert WebGIS
+name: Publish EarthAlert WebGIS
 on:
   push:
-    paths:
-      - '.github/workflows/bootstrap-earthalert.yml'
-      - 'tools/migrate.py'
-      - 'assets/atlas-v27.js'
-      - 'assets/atlas-v27.css'
+    branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 concurrency:
-  group: earthalert-bootstrap
+  group: earthalert-pages
   cancel-in-progress: false
 jobs:
-  migrate-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: true
-      - name: Download the complete existing EarthAlert project
+      - name: Validate assets and content
         run: |
-          git clone --depth=1 https://github.com/afrielha21-cell/EarthAlert-Indonesia.git /tmp/earthalert-old
-          rsync -a --exclude=.git --exclude=.github /tmp/earthalert-old/ ./
-      - name: Apply EarthAlert UI changes and assets
-        run: python3 tools/migrate.py
-      - name: Commit complete migration to main
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if ! git diff --cached --quiet; then
-            git commit -m "Migrate complete BMKG EarthAlert archive; Atlas Earth, InaRISK/BIG and chat widget"
-            git push origin HEAD:main
-          fi
+          test -f index.html
+          test -f assets/logos/big.svg
+          test -f assets/logos/inarisk.svg
+          test -f assets/tanya-earth.js
+          test -f data/history/2025.json
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text()
+          assert 'atlas-v27.js' in s and 'atlas-v27.css' in s
+          assert 'assets/logos/inarisk.svg' in s
+          assert 'assets/logos/big.svg' in s
+          print('Required EarthAlert assets exist.')
+          PY
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-      - name: Upload complete static WebGIS
+      - name: Upload static website
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
